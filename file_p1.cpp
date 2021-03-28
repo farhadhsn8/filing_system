@@ -13,26 +13,26 @@ using namespace std;
 bool exist(string key, vector <string> keys)
 {
 	bool exst = 0;
-	for (int i = 0; i < keys.size(); i+=2)    //bayad index zouj faqat barresi shavand 
+	for (int i = 0; i < keys.size(); i+=2)    //bayad index zouj faqat barresi shavand
 	{
 		if (key == keys[i]) exst = 1;
 	}
 	return exst;
 }
-
-
-void makefile(string name) //in tabe da qesmat use estefade mishavad 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void makefile(string name) //in tabe da qesmat use estefade mishavad
 {
-	name += ".txt";
 	ifstream file(name);
 	if (!file.is_open())
 	{
 		ofstream f(name);
-		
-	}
-	
-}
 
+	}
+
+}
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Fexist(string word, vector <string> files) //vector ra chek mikond k nam file tekrari nbashad
 {
 	bool exst = 0;
@@ -42,6 +42,8 @@ bool Fexist(string word, vector <string> files) //vector ra chek mikond k nam fi
 	}
 	return exst;
 }
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // in function 1 vector va 1 keyword grfte  va index keyword ra pas midehad.  agr key word far vec nbood -1 ra midahad.
 
 int get_index(string key, vector <string> keys)
@@ -53,21 +55,23 @@ int get_index(string key, vector <string> keys)
 	}
 	return index;
 }
-
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //in function 1 keyword va vector grfte va data ra midehad
 
 string get_data(string key, vector <string> keys)
 {
 	int index = get_index(key, keys);
+	if (index == -1) return "was not found.";
 	return keys[index + 1]; //data ye har keyword khaneye baAdi vector ast.
 }
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //in function 1 keyword va vector va data migirad   va data &  keyword ra be vector ezafe mikond.
 
-void set_data(string key, string data, vector <string> &keys)
+void set_data(string key, string data, vector <string> & keys)
 {
 	bool exst = exist(key, keys);
 	if (exst == 1) //update data
@@ -75,21 +79,30 @@ void set_data(string key, string data, vector <string> &keys)
 		int index_of_key = get_index(key, keys);
 		keys[index_of_key + 1] = data;
 	}
-	if (exst == 0) //add data and keyword	
+	if (exst == 0) //add data and keyword
 	{
 		keys.push_back(key);
 		keys.push_back(data);
 	}
 }
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+void hazf(string key, vector <string>& keys)
+{
+	int i = get_index(key, keys);
+	keys[i] = "";
+	keys[i + 1] = "";
 
-
+}
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 int main()
 {
 	bool use = 0;//ebteda bayad file entekhab shavad
 	cout <<endl<<endl<< "> ";
-	string esmfile;//esm file k bahash kar mikonim 
+	string esmfile;//esm file k bahash kar mikonim
 	string word;//kalamati ke karbar vared mikond
 	string klid;//estefade dar SET
 	string dade;//estefade dar SET
@@ -103,7 +116,7 @@ int main()
 			if (use == 0) cout << endl <<" ebteda bayad az dastoor \" USE \" estefade shavad.^_^" << endl << "> ";
 			cin >> word; //khandan (
 			cin >> word; //khandan klid
-			klid = word; 
+			klid = word;
 			cin >> word; //khandan )
 			cin >> word; //khandan (
 			cin >> word; //khandan dade
@@ -112,18 +125,18 @@ int main()
 			set_data(klid, dade, keydata); //estefade az tabe set data
 			ofstream ofs;
 			ofs.open(esmfile);
-			for (int i=0;i<keydata.size();i++){//neveshtan tak tak klid ha va dade ha az vector va copy dar file
+			for (int i = 0; i<keydata.size(); i++) {//neveshtan tak tak klid ha va dade ha az vector va copy dar file
 				ofs << keydata[i] << endl;
 			}
-			cout << endl << "> ";
-		
+			cout << endl << esmfile << "> ";
+
 
 		}
 		if (word == "GET") {
 			if (use == 0) cout << endl << " ebteda bayad az dastoor \" USE \" estefade shavad.^_^" << endl << "> ";
 			cin >> word; //khandan (
 			cin >> word;
-			cout << endl << get_data(word, keydata)<<endl<<"> ";//estefade az tabe get_data baraye return data
+			cout << endl << get_data(word, keydata)<<endl<< esmfile << "> ";//estefade az tabe get_data baraye return data
 			cin >> word; //khandan )
 		}
 
@@ -131,11 +144,25 @@ int main()
 			if (use == 0) cout << endl << " ebteda bayad az dastoor \" USE \" estefade shavad.^_^" << endl<<"> ";
 			cin >> word; //khandan (
 			cin >> word;
-			cout <<endl<< exist(word, keydata) << endl << "> ";//estefade az tabe exist baraye return 0 ya 1
+			cout <<endl<< exist(word, keydata) << endl << esmfile << "> ";//estefade az tabe exist baraye return 0 ya 1
 
 
 		}
-		
+		if(word == "DELETE")
+		{
+			if (use == 0) cout << endl << " ebteda bayad az dastoor \" USE \" estefade shavad.^_^" << endl << "> ";
+			cin >> word; //khandan (
+			cin >> word;
+			hazf (word, keydata);//HAZF KRDN KEY VA DATA
+			ofstream ofs;
+			ofs.open(esmfile);
+			for (int i = 0; i<keydata.size(); i++) {//neveshtan tak tak klid ha va dade ha az vector va copy dar file
+				ofs << keydata[i] << endl;
+			}
+			cout << endl << esmfile << "> ";
+		}
+
+
 		if (word == "USE") {
 			fcloseall();//bastan tamame file ha
 			keydata.clear();//pak kardan kolle vector

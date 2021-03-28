@@ -1,0 +1,11 @@
+﻿  stdafx.cpp
+  file_p1.cpp
+d:\projects\cpp\file_p1\file_p1\file_p1.cpp(16): warning C4018: '<': signed/unsigned mismatch
+d:\projects\cpp\file_p1\file_p1\file_p1.cpp(39): warning C4018: '<': signed/unsigned mismatch
+d:\projects\cpp\file_p1\file_p1\file_p1.cpp(52): warning C4018: '<': signed/unsigned mismatch
+d:\projects\cpp\file_p1\file_p1\file_p1.cpp(128): warning C4018: '<': signed/unsigned mismatch
+d:\projects\cpp\file_p1\file_p1\file_p1.cpp(159): warning C4018: '<': signed/unsigned mismatch
+d:\projects\cpp\file_p1\file_p1\file_p1.cpp(167): warning C4996: 'fcloseall': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _fcloseall. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(2453): note: see declaration of 'fcloseall'
+  file_p1.vcxproj -> D:\projects\cpp\file_p1\Debug\file_p1.exe
+  file_p1.vcxproj -> D:\projects\cpp\file_p1\Debug\file_p1.pdb (Partial PDB)
